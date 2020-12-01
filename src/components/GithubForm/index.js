@@ -2,12 +2,16 @@ import React, { Component } from 'react';
 
 class GithubForm extends Component {
     state = {
-        username: ""
+        username: "",
+        nameInput: "",
     }
 
+    // componentDidMount(){
+    //     this.fetchGithub()
+    // }
     
     handleInput = e => {
-        const {name, value} = e.target;
+        const {name, value} = e.target;        
         this.setState({[name]:value});
     }
 
@@ -17,6 +21,18 @@ class GithubForm extends Component {
             username: prevState.nameInput,
             nameInput: ""
         }))
+        // this.fetchGithub()
+    }
+
+    fetchGithub = () => {
+        fetch(`https://api.github.com/users/${this.state.username}/repos`)
+            .then(r => r.json())
+            .then(this.diplayRepos)
+            .catch(console.warn)
+    }
+
+    diplayRepos (data) {
+        console.log(data)
     }
 
 
@@ -31,8 +47,6 @@ class GithubForm extends Component {
             </>
         )
     }
-
 }
-
 
 export default GithubForm;
