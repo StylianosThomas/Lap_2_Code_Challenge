@@ -1,12 +1,19 @@
 import React, { Component } from 'react';
-import GithubForm from './components/GithubForm';
+import { Header, Footer } from './layout';
+// import { GithubForm, RepoContainer } from './components';
 
 class App extends Component {
     render() {
         return (
-            <>
-                <GithubForm/>
-            </>
+            <div id="App">
+                {/* <Header/> */}
+                <Switch>
+                    {/* <Route exact path="/" component={ Welcome }/>
+                    <Route path="/about" component={ About }/> */}
+                    <Route path="/search"component={ Search }/>
+                </Switch>
+                {/* <Footer/> */}
+            </div>
         )
     };
 };

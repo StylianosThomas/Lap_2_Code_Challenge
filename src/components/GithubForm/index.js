@@ -5,10 +5,6 @@ class GithubForm extends Component {
         username: "",
         nameInput: "",
     }
-
-    // componentDidMount(){
-    //     this.fetchGithub()
-    // }
     
     handleInput = e => {
         const {name, value} = e.target;        
@@ -34,7 +30,6 @@ class GithubForm extends Component {
     diplayRepos (data) {
         console.log(data)
     }
-
 
     render() {
         return (
