@@ -1,26 +1,39 @@
 import React from 'react';
 
-export default function (data) {
-    console.log(data)
+class Result extends React.Component{
+    data = this.props;
+
+    allRepos = ()=>{
+        const repos = [];
+
+        this.props.repos.forEach(repo => {
+            repos.push(
+                <div key={repo.name}>
+                    <h1>{repo.name}</h1>
+                    <a href = {repo.html_url} />
+                    <p>{repo.updated_at}</p>
+                </div>
+            )
+        })
+        return repos;
+    }
+    
     // data.repos.forEach(repo => {
-    //     return (
-    //         <section>
-    //         <div >
+    //     allRepos.push(
+    //         <div key={repo.name}>
     //             <h1>{repo.name}</h1>
     //             <a href = {repo.html_url} />
     //             <p>{repo.updated_at}</p>
     //         </div>
-    //         </section>
     //     )
     // });
 
-    return (
-        <section>
-        <div >
-            <h1>{data.repos.name}</h1>
-            <a href = {data.repos.html_url} />
-            <p>{data.repos.updated_at}</p>
-        </div>
-        </section>
-    )
+    render(){
+        console.log(this.props.repos);
+        return (
+            this.allRepos()
+        )
+    }
 };
+
+export default Result;

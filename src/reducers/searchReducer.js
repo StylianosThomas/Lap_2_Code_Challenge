@@ -1,4 +1,6 @@
-const initState = { username: "", repos:[{name:"", html_url:"", update_at:""}], loading: false};
+const initState = { username: "", 
+            repos:[{name:"", html_url:"", update_at:""}], 
+            loading: false};
 
 const searchReducer = (state=initState, action) => {
     switch(action.type){
