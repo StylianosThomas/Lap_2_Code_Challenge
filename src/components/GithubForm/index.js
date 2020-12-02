@@ -1,47 +1,29 @@
 import React, { Component } from 'react';
 
+// only few changes here
+
 class GithubForm extends Component {
-    state = {
-        username: "",
-        nameInput: "",
-    }
-    
-    handleInput = e => {
-        const {name, value} = e.target;        
-        this.setState({[name]:value});
-    }
+    state = { location: "" }
 
-    handleFormSubmit = e => {
+    handleSubmit = e => {
         e.preventDefault();
-        this.setState(prevState => ({
-            username: prevState.nameInput,
-            nameInput: ""
-        }))
-        // this.fetchGithub()
-    }
+        this.props.getResult(this.state.location);
+        this.setState({location: ""});
+    };
 
-    fetchGithub = () => {
-        fetch(`https://api.github.com/users/${this.state.username}/repos`)
-            .then(r => r.json())
-            .then(this.diplayRepos)
-            .catch(console.warn)
-    }
+    updateInput = e => {
+        const location = e.target.value;
+        this.setState({ location });
+    };
 
-    diplayRepos (data) {
-        console.log(data)
-    }
-
-    render() {
+    render(){
         return (
-            <>
-                <h3 id="greeting"> Hi there, {this.state.username ? this.state.username : 'friend'}!</h3>
-                <form onSubmit={this.handleFormSubmit}>
-                <input type="text" id="nameInput" name="nameInput" placeholder="That's not my name!" value={this.state.nameInput} onChange={this.handleInput}/>
-                <input type="submit" value="Update!"/>
-                </form>
-            </>
-        )
-    }
-}
+            <form onSubmit={this.handleSubmit}>
+                <input type="text" name="userInput" value={this.state.location} onChange={this.updateInput}/>
+                <input type="submit" value="Search" />
+            </form>
+        );
+    };
+};
 
 export default GithubForm;

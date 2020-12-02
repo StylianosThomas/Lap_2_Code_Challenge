@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import { Switch, Route } from 'react-router-dom';
 import { Header, Footer } from './layout';
-// import { GithubForm, RepoContainer } from './components';
+import { Search } from './pages';
 
 class App extends Component {
     render() {

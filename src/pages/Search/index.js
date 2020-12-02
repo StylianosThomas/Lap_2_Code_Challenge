@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { SearchForm, Result } from '../../components';
+import { GithubForm, Result } from '../../components';
 import { getResult } from '../../actions';
 
 class Search extends Component {
@@ -16,7 +16,7 @@ class Search extends Component {
             <div id="search">
                 Where do you want to search?
 
-                <SearchForm getResult={this.getResult}/>    {/* all it needed was to add a <this.> before getResult!!*/}
+                <GithubForm getResult={this.getResult}/>    {/* all it needed was to add a <this.> before getResult!!*/}
 
                 <h1>{this.props.location}</h1>
 
@@ -26,6 +26,8 @@ class Search extends Component {
         );
     };
 };
+
+// mSTP has to change
 
 export const mSTP = state => ({
     result: state.result,
