@@ -1,23 +1,18 @@
-const loading = location => ({ type: 'LOADING', payload: location });
+const loading = username => ({ type: 'LOADING', payload: username });
 
-const loadResult = ({ results: { sunrise, sunset } }) => ({ 
+const loadResult = ({ name, html_url, updated_at }) => ({
     type: 'LOAD_RESULT',
-    payload: { sunrise, sunset } 
-});
-
-// fetch(`https://api.github.com/users/${this.state.username}/repos`)
-//             .then(r => r.json())
-//             .then(this.diplayRepos)
-//             .catch(console.warn)
-
+    payload: { name, html_url, updated_at }
+})
 
 export const getResult = searchTerm => {
     return async dispatch => {
         dispatch(loading(searchTerm));
         try {
-            const longLat = await fetchLongLat(searchTerm);
-            const riseSet = await fetchSunriseSunset(longLat);
-            dispatch(loadResult(riseSet))
+            const userRepos = await fetchGithubData(searchTerm)
+            userRepos.forEach(repo => {
+                dispatch(loadResult(repo))
+            });
         } catch (err) {
             console.warn(err.message);
             dispatch({ type: 'SET_ERROR', payload: err.message })
@@ -25,25 +20,13 @@ export const getResult = searchTerm => {
     };
 };
 
-
-// Helpers
-const fetchLongLat = async searchTerm => {
+const fetchGithubData = async searchTerm => {
     try {
-        const resp = await fetch(`https://restcountries.eu/rest/v2/capital/${searchTerm}`);
+        const resp = await fetch(`https://api.github.com/users/${searchTerm}/repos`);
         const data = await resp.json();
-        if (data.status === 404) { throw Error('That\'s not a valid capital city!') }
-        return data[0].latlng;
-    } catch(err) {
-        throw new Error(err.message)
-    }
-}
-
-const fetchSunriseSunset = async ([ longt, latt ]) => {
-    try {
-        const resp = await fetch(`https://api.sunrise-sunset.org/json?lat=${latt}&lng=${longt}&date=today`);
-        const data = await resp.json();
+        if (data.status === 404) { throw Error('User does not exist!') }
         return data;
     } catch(err) {
         throw new Error(err.message)
     }
-}
+};

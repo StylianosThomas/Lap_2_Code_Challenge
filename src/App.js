@@ -8,11 +8,14 @@ class App extends Component {
         return (
             <div id="App">
                 {/* <Header/> */}
-                <Switch>
+                <Search/>
+
+                {/* <Switch> */}
                     {/* <Route exact path="/" component={ Welcome }/>
                     <Route path="/about" component={ About }/> */}
-                    <Route path="/search"component={ Search }/>
-                </Switch>
+                    {/* <Route path="/"component={ Search }/> */}
+                {/* </Switch> */}
+
                 {/* <Footer/> */}
             </div>
         )

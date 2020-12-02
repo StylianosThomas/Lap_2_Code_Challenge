@@ -1,19 +1,26 @@
 import React from 'react';
 
-export default function ({ result: { sunrise, sunset } }) {
+export default function (data) {
+    console.log(data)
+    // data.repos.forEach(repo => {
+    //     return (
+    //         <section>
+    //         <div >
+    //             <h1>{repo.name}</h1>
+    //             <a href = {repo.html_url} />
+    //             <p>{repo.updated_at}</p>
+    //         </div>
+    //         </section>
+    //     )
+    // });
+
     return (
         <section>
-        <div id="sunrise">
-            {/* <img src="../../images/sun.png" alt="Sun" /> */}
-            <p>{sunrise}</p>
-        </div>
-
-        <div id="sunset">
-            {/* <img src="../../images/moon.png" alt="Moon" /> */}
-            <p>{sunset}</p>
+        <div >
+            <h1>{data.repos.name}</h1>
+            <a href = {data.repos.html_url} />
+            <p>{data.repos.updated_at}</p>
         </div>
         </section>
     )
 };
-
-//all this should change to display github repos
